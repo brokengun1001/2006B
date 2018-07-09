@@ -53,14 +53,14 @@ class patient{
 };
 
 int main(){
-	patient pt[10000];
+	patient pt[1000];
 	int PresID,n = 0,i = 0,num = 0;;
 	char c;
 	int CD4Date,CD4Count,HIVDate,
 	CD4CountSum0=0,CD4CountSum4=0,CD4CountSum8=0,CD4CountSum24=0,CD4CountSum40=0,CD4CountSum50=0;
 	double HIVCount,HIVCountSum0=0,HIVCountSum4=0,HIVCountSum8=0,HIVCountSum24=0,HIVCountSum40=40,HIVCountSum50=0;
 	ifstream file;
-	file.open("附件1数据（CD4大于300）.txt");
+	file.open("附件1数据（CD4大于200）.txt");
 	while(!file.eof()){
 		file>>PresID;
 		if(PresID != pt[n].getID()){
@@ -88,23 +88,24 @@ int main(){
 		if(CD4Date>=0&&CD4Date<=2){CD4CountSum0+=CD4Count;HIVCountSum0+=HIVCount;}
 		if(CD4Date>=3&&CD4Date<=6){CD4CountSum4+=CD4Count;HIVCountSum4+=HIVCount;}
 		if(CD4Date>=7&&CD4Date<=16){CD4CountSum8+=CD4Count;HIVCountSum8+=HIVCount;}
-		if(CD4Date>=17&&CD4Date<=32){CD4CountSum24+=CD4Count;HIVCountSum24+=HIVCount;} 
-		if(CD4Date>=33&&CD4Date<=45){CD4CountSum40+=CD4Count;HIVCountSum40+=HIVCount;} 
-		if(CD4Date>=46){CD4CountSum50+=CD4Count;HIVCountSum50+=HIVCount;} 
+		if(CD4Date>=17&&CD4Date<=32){CD4CountSum24+=CD4Count;HIVCountSum24+=HIVCount;}
+		if(CD4Date>=33&&CD4Date<=45){CD4CountSum40+=CD4Count;HIVCountSum40+=HIVCount;}
+		if(CD4Date>=46){CD4CountSum50+=CD4Count;HIVCountSum50+=HIVCount;}
 		pt[n].setID(PresID);
 		pt[n].setCD4date(i,CD4Date);
 		pt[n].setCD4(i,CD4Count);
 		pt[n].setHIVdate(i,HIVDate);
 		pt[n].setHIV(i,HIVCount);
-		cout<<pt[n].getID()<<"\t"<<pt[n].getCD4date(i)<<"\t"<<pt[n].getCD4(i)<<"\t"<<"\t"<<pt[n].getHIVdate(i)<<"\t"<<pt[n].getHIV(i)<<endl;
+//		cout<<pt[n].getID()<<"\t"<<pt[n].getCD4date(i)<<"\t"<<pt[n].getCD4(i)<<"\t"<<"\t"<<pt[n].getHIVdate(i)<<"\t"<<pt[n].getHIV(i)<<endl;
 		i++;
 	}
 	file.close();
 
+
 	int m=0,n1=0,n2=0,n3=0,n4=0,a=0;
     ofstream fp;
-    fp.open("附件1数据（CD4大于300取平均）.txt");
-    
+    fp.open("附件1数据（CD4大于200取平均）.txt");
+
     for(int i = 0;i < num;i++){
     if(pt[i].getID()){
 		a++;
@@ -122,7 +123,6 @@ int main(){
 //		}
 	}
     }
-    cout<<"共有"<<a<<"个病人CD4小于100"<<endl;
 	fp<<0<<"\t"<<CD4CountSum0/a<<"\t"<<0<<"\t"<<HIVCountSum0/a<<endl;
 	fp<<4<<"\t"<<CD4CountSum4/a<<"\t"<<4<<"\t"<<HIVCountSum4/a<<endl;
 	fp<<8<<"\t"<<CD4CountSum8/a<<"\t"<<8<<"\t"<<HIVCountSum8/a<<endl;
